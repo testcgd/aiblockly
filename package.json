@@ -1,0 +1,15 @@
+{
+  "name": "aiblockly-root",
+  "version": "1.0.0",
+  "description": "AIBlockly application with integrated frontend and backend",
+  "scripts": {
+    "install:all": "npm install && cd api && npm install && cd ../ui && npm install",
+    "start:api": "cd api && npm run dev",
+    "start:ui": "cd ui && npm start",
+    "dev": "concurrently \"npm run start:api\" \"npm run start:ui\"",
+    "build": "cd ui && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 

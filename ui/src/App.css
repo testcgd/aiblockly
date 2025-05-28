@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+/* Blockly specific styles */
+.blocklyMainBackground {
+  stroke: #ddd;
+}
+
+.blocklyToolboxDiv {
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  overflow-x: visible;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 70;
+} 
