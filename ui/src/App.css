@@ -1,24 +1,33 @@
 .App {
   text-align: center;
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .App-header {
   background-color: #282c34;
-  padding: 20px;
+  padding: 10px;
   color: white;
-  height: 20vh;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .App-header h1 {
   margin: 0;
-  font-size: 2em;
+  font-size: 1.5em;
+}
+
+.blockly-workspace-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
 }
 
 /* Blockly specific styles */
@@ -33,4 +42,15 @@
   overflow-y: auto;
   position: absolute;
   z-index: 70;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.blocklyTreeRow {
+  padding: 8px;
+  margin-bottom: 2px;
+  border-radius: 4px;
+}
+
+.blocklyTreeRow:hover {
+  background-color: #e9ecef;
 } 
