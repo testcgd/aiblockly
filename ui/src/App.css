@@ -9,19 +9,34 @@
 
 .App-header {
   background-color: #282c34;
-  padding: 10px;
+  padding: 10px 20px;
   color: white;
   height: 60px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-shrink: 0;
 }
 
 .App-header h1 {
   margin: 0;
   font-size: 1.5em;
+}
+
+.mcp-toggle-btn {
+  background-color: #5b80a5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.mcp-toggle-btn:hover {
+  background-color: #4a6a8a;
 }
 
 .blockly-workspace-container {
@@ -53,4 +68,193 @@
 
 .blocklyTreeRow:hover {
   background-color: #e9ecef;
+}
+
+/* MCP Panel Styles */
+.mcp-panel {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.mcp-panel h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.4em;
+}
+
+.mcp-panel h3 {
+  color: #555;
+  font-size: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.mcp-servers-list {
+  margin-bottom: 20px;
+}
+
+.server-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.server-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.server-info strong {
+  color: #333;
+  font-size: 1.1em;
+}
+
+.status {
+  font-size: 0.9em;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status.connected {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.disconnected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.tool-count {
+  background-color: #e7f3ff;
+  color: #004085;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.server-actions button {
+  background-color: #5b80a5;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.server-actions button:hover:not(:disabled) {
+  background-color: #4a6a8a;
+}
+
+.server-actions button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.mcp-add-server {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.mcp-add-server input {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.mcp-add-server input:focus {
+  outline: none;
+  border-color: #5b80a5;
+}
+
+.mcp-add-server button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.mcp-add-server button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.mcp-add-server button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.mcp-tools-list {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.mcp-tools-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.mcp-tools-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.mcp-tools-list li:last-child {
+  border-bottom: none;
+}
+
+.mcp-tools-list li strong {
+  color: #5b80a5;
+  font-size: 1em;
+}
+
+.mcp-tools-list li p {
+  margin: 5px 0 0 0;
+  color: #666;
+  font-size: 0.9em;
 } 

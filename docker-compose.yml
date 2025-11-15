@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: aiblockly-api
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+    networks:
+      - aiblockly-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: aiblockly-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001
+    depends_on:
+      - api
+    networks:
+      - aiblockly-network
+
+  test-mcp-server:
+    build:
+      context: ./test-mcp-server
+      dockerfile: Dockerfile
+    container_name: test-mcp-server
+    networks:
+      - aiblockly-network
+
+networks:
+  aiblockly-network:
+    driver: bridge
