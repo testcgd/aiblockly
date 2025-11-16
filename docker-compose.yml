@@ -1,38 +1,31 @@
 version: '3.8'
 
 services:
-  api:
+  # Main AIBlockly application (API + UI)
+  aiblockly:
     build:
       context: .
-      dockerfile: Dockerfile.api
-    container_name: aiblockly-api
+      dockerfile: Dockerfile
+    container_name: aiblockly
     ports:
       - "3001:3001"
     environment:
       - PORT=3001
       - NODE_ENV=production
+    volumes:
+      # Mount for MCP server configurations (optional)
+      - ./mcp-configs:/app/mcp-configs:ro
     networks:
       - aiblockly-network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/health"]
-      interval: 10s
-      timeout: 5s
+      interval: 30s
+      timeout: 10s
       retries: 3
+      start_period: 10s
 
-  ui:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    container_name: aiblockly-ui
-    ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:3001
-    depends_on:
-      - api
-    networks:
-      - aiblockly-network
-
+  # Test MCP Server (for development/testing)
   test-mcp-server:
     build:
       context: ./test-mcp-server
@@ -40,7 +33,34 @@ services:
     container_name: test-mcp-server
     networks:
       - aiblockly-network
+    restart: unless-stopped
+    profiles:
+      - development
+      - test
+
+  # Nginx reverse proxy (optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: aiblockly-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ui/build:/usr/share/nginx/html:ro
+    depends_on:
+      - aiblockly
+    networks:
+      - aiblockly-network
+    restart: unless-stopped
+    profiles:
+      - production
 
 networks:
   aiblockly-network:
     driver: bridge
+    name: aiblockly-network
+
+volumes:
+  mcp-data:
+    driver: local
