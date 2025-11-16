@@ -2,6 +2,7 @@
 
 const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
 const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');
+const { ListToolsRequestSchema, CallToolRequestSchema } = require('@modelcontextprotocol/sdk/types.js');
 
 /**
  * Test MCP Server for AIBlockly
@@ -94,12 +95,12 @@ const tools = [
 ];
 
 // Handle list tools request
-server.setRequestHandler('tools/list', async () => {
+server.setRequestHandler(ListToolsRequestSchema, async () => {
   return { tools };
 });
 
 // Handle tool call request
-server.setRequestHandler('tools/call', async (request) => {
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
   console.error(`[Test MCP Server] Tool called: ${name}`, args);
